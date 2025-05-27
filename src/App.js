@@ -32,11 +32,9 @@ export default function ChatApp() {
     let botMessage = "";
   
     eventSource.onmessage = (event) => {
-      const chunk = event.data; // avoid adding space
-      if (botMessage && !botMessage.endsWith(' ') && !chunk.startsWith(' ')) {
-        botMessage += ' ';
-      }
-
+      const data = JSON.parse(event.data);
+      const chunk = data.text;
+      
       botMessage += chunk;
   
       setChatLog((prev) => {
